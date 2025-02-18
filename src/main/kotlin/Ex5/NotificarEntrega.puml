@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+header "Sistema de Comandes - Notificar Entrega"
+actor Repartidor as rep
+boundary Interficie
+control Controladors
+entity "Base de dades" as BBDD
+
+rep -> Interficie : Selecciona comanda per notificar
+Interficie -> Controladors : comandaPerNotificar(comanda)
+Controladors -> BBDD : Consultar entrega de la comanda
+BBDD --> Controladors : Retorna les dades de la comanda
+Controladors -> Interficie : notificarEntregaComanda()
+
+@enduml

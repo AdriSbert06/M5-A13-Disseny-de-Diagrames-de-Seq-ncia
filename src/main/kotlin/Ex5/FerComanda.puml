@@ -1,0 +1,31 @@
+@startuml
+header "Sistema de Comandes - Fer comanda"
+actor Client as c
+boundary Interficie
+control Seleccionar_Plats as SP
+control Controladors
+entity "Base de Dades" as BBDD
+
+c -> Interficie: Fer comanda
+Interficie -> SP: Escollir_Plat():llistatPlats
+SP -> Controladors: Llista de tots els plats
+Controladors -> BBDD : S'afegeix la comanda a la BBDD
+Controladors -> Interficie : mostrarComanda()
+c -> Interficie : Confirma la comanda
+Interficie -> Controladors : propina():Boolean
+
+alt Afegir popina
+Controladors -> Interficie: True = Donar propina
+Interficie -> Controladors: sumaPropinaATotal()
+Controladors ->BBDD: Es modifica el total de la comanda
+BBDD -> Controladors: totalComanda()
+Controladors -> Interficie : mostrarComanda()
+Interficie -> Controladors : ferPagament()
+Controladors -> BBDD : La comanda pasa a ser pagada
+else
+Controladors -> Interficie: False = No donar propina
+Interficie -> Controladors : ferPagament()
+Controladors -> BBDD : La comanda pasa a ser pagada
+end
+
+@enduml

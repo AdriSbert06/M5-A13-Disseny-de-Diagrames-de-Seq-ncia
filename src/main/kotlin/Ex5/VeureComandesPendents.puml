@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+header "Sistema de Comandes (Veure comandes pendents)"
+actor Cuiner as cu
+boundary Interficie
+control Controladors
+entity "Base de dades" as BBDD
+
+Controladors -> BBDD: Envia comandes pendents
+BBDD --> Controladors: Retorna comandes pendents
+Controladors -> Interficie: Rep comandes pendents
+cu -> Interficie : Veu les comandes pendents
+Interficie -> Controladors : apuntaComandesPendents()
+Controladors -> BBDD : Envia les comandes pendents fetes
+BBDD --> Controladors : Retorna llista de comandes pendents fetes
+Controladors -> Interficie : mostrarComandesPendentsFetes()
+
+@enduml

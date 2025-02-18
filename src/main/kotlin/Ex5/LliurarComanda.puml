@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+header "Sistema de Comandes - Lliurar comanda"
+actor Repartidor as rep
+boundary Interficie
+control Controladors
+entity "Base de dades" as BBDD
+
+rep -> Interficie : Rebre comanda
+Interficie -> Controladors : entregarComanda(comanda)
+Controladors -> BBDD : Comanda Rebuda
+BBDD --> Controladors : Es retorna la comanda modificada
+Controladors -> Interficie : mostrarComandaModificada()
+
+@enduml
+
+

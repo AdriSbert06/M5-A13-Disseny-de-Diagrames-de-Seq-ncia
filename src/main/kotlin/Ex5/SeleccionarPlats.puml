@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+header "Sistema de Comandes - Seleccionar Plats"
+actor Client as c
+boundary Interficie
+control Controladors
+entity "Base de Dades" as BBDD
+
+Controladors -> BBDD : Consulta de plats disponibles
+BBDD --> Controladors : Retorn de llista de plats disp
+Controladors -> Interficie : mostrarPlatsDisponibles()
+c -> Interficie : Selecciona els plats que vol
+Interficie -> Controladors  : platsSeleccionats()
+Controladors --> ferComanda : Retorna la llista amb els plats seleccionats pel client
+
+@enduml
